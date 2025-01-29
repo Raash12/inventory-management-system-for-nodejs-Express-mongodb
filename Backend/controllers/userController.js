@@ -27,4 +27,26 @@ const loginUser = async (req, res) => {
     }
 };
 
-module.exports = { registerUser, loginUser };
+// Update user information
+const updateUser = async (req, res) => {
+    const userId = req.params.id;
+    const { username, password } = req.body;
+    
+    try {
+        const updates = {};
+        if (username) updates.username = username;
+        if (password) updates.password = await bcrypt.hash(password, 10);
+
+        const updatedUser = await User.findByIdAndUpdate(userId, updates, { new: true });
+        if (!updatedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.status(200).json({ message: "User updated successfully", user: updatedUser });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+// Export all functions
+module.exports = { registerUser, loginUser, updateUser };
