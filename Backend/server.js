@@ -20,6 +20,8 @@ connectDB();
 // Define routes
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
+// Use item routes
+
 // Add additional routes
 
 const PORT = process.env.PORT || 7000;
