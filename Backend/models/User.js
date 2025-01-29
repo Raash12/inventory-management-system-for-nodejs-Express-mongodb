@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// Define the user schema
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -12,9 +13,9 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        default: 'user', // 'admin' or 'user'
+        default: 'user', // Default role is 'user'
     },
 });
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+// Export the User model
+module.exports = mongoose.model('User', userSchema);
