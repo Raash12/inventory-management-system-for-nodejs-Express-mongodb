@@ -5,7 +5,7 @@ const cors = require('cors');
 
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
-// Import additional routes
+const itemRoutes = require('./routes/itemRoutes'); // Import item routes
 
 // Load environment variables from .env file
 dotenv.config();
@@ -20,9 +20,7 @@ connectDB();
 // Define routes
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
-// Use item routes
-
-// Add additional routes
+app.use('/api/items', itemRoutes); // Use item routes
 
 const PORT = process.env.PORT || 7000;
 app.listen(PORT, () => {
