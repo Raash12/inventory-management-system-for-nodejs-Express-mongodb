@@ -9,35 +9,7 @@ The Inventory Management System is a web application designed to manage products
 - **Sales Tracking**: Record and manage sales transactions.
 - **Item Management**: Manage inventory items linked to products.
 - **Responsive Design**: Utilizes Tailwind CSS for a modern look and feel.
-
-## Project Structure
-
-inventory-management-system/
-├── client/ # React front-end application
-│ ├── public/ # Public assets (e.g., index.html, favicon)
-│ ├── src/ # Source code
-│ │ ├── components/ # Reusable React components
-│ │ ├── pages/ # Application pages (e.g., Home, Products, Sales)
-│ │ ├── hooks/ # Custom hooks for logic reuse
-│ │ ├── context/ # Context API for state management
-│ │ ├── services/ # API calls and services
-│ │ ├── App.js # Main application file
-│ │ ├── index.js # Entry point for React
-│ │ └── styles/ # Tailwind CSS styles
-│ └── tailwind.config.js # Tailwind CSS configuration
-├── server/ # Node.js back-end application
-│ ├── config/ # Configuration files (e.g., database connection)
-│ ├── controllers/ # Request handlers for API routes
-│ ├── models/ # Mongoose models for MongoDB
-│ ├── routes/ # API routes
-│ ├── middleware/ # Middleware functions (e.g., authentication)
-│ ├── .env # Environment variables
-│ ├── server.js # Main server file
-│ └── package.json # Server dependencies
-├── README.md # Project documentation
-└── package.json # Client dependencies
-
-
+- 
 ## Installation
 
 1. Clone the repository:
