@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User'); // Import User model
 const { registerUser, loginUser, updateUser, deleteUser } = require('../controllers/userController');
+const adminMiddleware = require('../middleware/adminMiddleware'); // Ensure the path is correct
+const User = require('../models/User'); // Import User model for fetching users
 
 // Register a new user
 router.post('/register', registerUser);
@@ -9,11 +10,11 @@ router.post('/register', registerUser);
 // Log in a user
 router.post('/login', loginUser);
 
-// Update user information
-router.put('/:id', updateUser); // Update user by ID
+// Update user information (admin only)
+router.put('/:id', adminMiddleware, updateUser);
 
-// Delete user
-router.delete('/:id', deleteUser); // Delete user by ID
+// Delete user (admin only)
+router.delete('/:id', adminMiddleware, deleteUser);
 
 // Get all users
 router.get('/', async (req, res) => {

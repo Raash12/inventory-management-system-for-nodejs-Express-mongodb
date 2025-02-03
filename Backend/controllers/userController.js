@@ -1,13 +1,26 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose'); // Import mongoose
+const mongoose = require('mongoose');
 
 // Register a new user
 const registerUser = async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, role } = req.body;
+
+    const existingUsers = await User.find();
+
+    // Create a default admin user if no users exist
+    if (existingUsers.length === 0) {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const adminUser = new User({ username: 'admin', password: hashedPassword, role: 'admin' });
+        await adminUser.save();
+        return res.status(201).json({ message: 'Default admin user created' });
+    }
+
+    // Regular user registration
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ username, password: hashedPassword });
+    const user = new User({ username, password: hashedPassword, role: role || 'user' });
+
     try {
         await user.save();
         res.status(201).json({ message: 'User registered successfully' });
@@ -30,8 +43,7 @@ const loginUser = async (req, res) => {
 
 // Update user information
 const updateUser = async (req, res) => {
-    const userId = req.params.id; 
-    console.log('Received user ID:', userId); // Log the received ID
+    const userId = req.params.id;
     const { username, password } = req.body;
 
     try {
@@ -57,7 +69,6 @@ const updateUser = async (req, res) => {
 // Delete user
 const deleteUser = async (req, res) => {
     const userId = req.params.id;
-    console.log('Received user ID for deletion:', userId); // Log the received ID
 
     try {
         if (!mongoose.Types.ObjectId.isValid(userId)) {

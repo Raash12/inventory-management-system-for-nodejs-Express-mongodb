@@ -1,11 +1,11 @@
 const express = require('express');
-const connectDB = require('./config/db');
+const connectDB = require('./config/db'); // Ensure this config file exists for database connection
 const dotenv = require('dotenv');
 const cors = require('cors');
 
-const userRoutes = require('./routes/userRoutes');
-const productRoutes = require('./routes/productRoutes');
-const itemRoutes = require('./routes/itemRoutes'); // Import item routes
+const userRoutes = require('./routes/userRoutes'); // Import user routes
+const productRoutes = require('./routes/productRoutes'); // Ensure this file exists
+const itemRoutes = require('./routes/itemRoutes'); // Ensure this file exists
 
 // Load environment variables from .env file
 dotenv.config();
